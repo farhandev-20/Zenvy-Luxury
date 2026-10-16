@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-gold-50: #fbf8f3;
+  --color-gold-100: #f5eedf;
+  --color-gold-600: #bfa054;
+  --color-gold-700: #a3813b;
+  --color-gold-800: #88652c;
+  --color-gold-900: #6d4f20;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #faf8f5;
+  color: #1c1917;
+  overflow-x: hidden;
+}
+
+/* Luxury minimal animations */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

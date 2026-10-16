@@ -1,0 +1,6 @@
+{
+  "name": "Zenvy Luxury",
+  "description": "An ultra-premium minimalist luxury e-commerce experience catering to exquisite taste in fashion, beauty, jewelry, and departments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
