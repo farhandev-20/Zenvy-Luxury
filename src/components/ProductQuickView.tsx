@@ -66,7 +66,7 @@ export default function ProductQuickView({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-10">
           
           {/* Backdrop blur overlay */}
           <motion.div 
@@ -83,30 +83,30 @@ export default function ProductQuickView({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className="relative w-full max-w-5xl bg-[#fdfcfb] rounded-[2.5rem] overflow-y-auto md:overflow-hidden border border-stone-200 shadow-2xl z-10 grid grid-cols-1 md:grid-cols-12 max-h-[90vh] md:max-h-[85vh]"
+            className="relative w-full max-w-5xl bg-[#fdfcfb] rounded-t-[2rem] sm:rounded-[2.5rem] overflow-y-auto md:overflow-hidden border border-stone-200 shadow-2xl z-10 grid grid-cols-1 md:grid-cols-12 max-h-[92dvh] md:max-h-[85vh]"
           >
             {/* Elegant Floating Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-10 h-10 rounded-full bg-white/95 hover:bg-stone-100 text-stone-800 hover:text-stone-950 flex items-center justify-center shadow-md transition-all hover:scale-105 active:scale-95"
+              className="absolute top-3 right-3 sm:top-6 sm:right-6 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-stone-100 text-stone-800 hover:text-stone-950 flex items-center justify-center shadow-md transition-all hover:scale-105 active:scale-95"
               aria-label="Close detail modal"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
             {/* Left Side: Custom Gorgeous Gallery Split */}
-            <div className="md:col-span-6 relative bg-stone-50 h-[260px] sm:h-[350px] md:h-full flex flex-col justify-between p-4 sm:p-6">
+            <div className="md:col-span-6 relative bg-stone-50 h-[220px] sm:h-[350px] md:h-full flex flex-col justify-between p-3 sm:p-6">
               
               {/* Product Badge / Promo Tag Overlay */}
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
-                <span className="text-[9px] tracking-[0.25em] bg-stone-900 text-stone-100 px-3 py-1.5 sm:px-4 sm:py-2 uppercase rounded-full font-bold shadow-md flex items-center gap-1">
-                  <Sparkles size={11} className="text-amber-400 animate-pulse" />
+              <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-20">
+                <span className="text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.25em] bg-stone-900 text-stone-100 px-2.5 py-1 sm:px-4 sm:py-2 uppercase rounded-full font-bold shadow-md flex items-center gap-1">
+                  <Sparkles size={10} className="text-amber-400 animate-pulse" />
                   FASHION STUDIO
                 </span>
               </div>
 
               {/* Main Pristine Image Display */}
-              <div className="w-full h-full relative flex items-center justify-center overflow-hidden rounded-[1.8rem] bg-[#f9f8f6] border border-stone-200/50 shadow-inner">
+              <div className="w-full h-full relative flex items-center justify-center overflow-hidden rounded-[1.4rem] sm:rounded-[1.8rem] bg-[#f9f8f6] border border-stone-200/50 shadow-inner">
                 <AnimatePresence mode="wait">
                   <motion.img 
                     key={activeImageTab}
@@ -123,12 +123,12 @@ export default function ProductQuickView({
               </div>
 
               {/* Thumbnail Selectors Row at Bottom (Visual Angles) */}
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-20 flex justify-center items-center gap-3">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 z-20 flex justify-center items-center gap-2 sm:gap-3">
                 {alternateImages.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveImageTab(i)}
-                    className={`relative w-11 h-11 sm:w-14 sm:h-14 rounded-xl overflow-hidden border-2 bg-white transition-all shadow-sm ${
+                    className={`relative w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border-2 bg-white transition-all shadow-sm ${
                       activeImageTab === i ? 'border-[#dca42b] scale-105 shadow-md' : 'border-transparent hover:border-stone-300'
                     }`}
                   >
@@ -140,7 +140,7 @@ export default function ProductQuickView({
             </div>
 
             {/* Right Side: Exquisite Craftsmanship Specifications & Options */}
-            <div className="md:col-span-6 flex flex-col justify-between p-5 sm:p-10 md:overflow-y-auto h-auto md:h-full md:max-h-[85vh] bg-[#fdfcfb]">
+            <div className="md:col-span-6 flex flex-col justify-between p-4 sm:p-8 md:p-10 md:overflow-y-auto h-auto md:h-full md:max-h-[85vh] bg-[#fdfcfb]">
               
               {/* Header Title Information */}
               <div>
@@ -259,15 +259,15 @@ export default function ProductQuickView({
 
               </div>
 
-              {/* CTAs at Bottom */}
-              <div className="space-y-4 pt-4 border-t border-stone-100">
-                <div className="flex gap-3">
+              {/* CTAs at Bottom - Sticky on mobile */}
+              <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-stone-100 sticky bottom-0 bg-[#fdfcfb] z-20 pb-3 sm:pb-0">
+                <div className="flex gap-2.5 sm:gap-3">
                   
                   {/* Main addition flow */}
                   <button
                     onClick={handleBagSubmit}
                     disabled={addedMessage}
-                    className="flex-grow flex items-center justify-center gap-2 px-6 py-4 bg-[#f59e0b] hover:bg-[#d97706] disabled:bg-emerald-600 text-stone-950 disabled:text-white text-xs font-bold uppercase tracking-[0.25em] rounded-full transition-all duration-300 hover:scale-[1.02] active:translate-y-0.5 shadow-md"
+                    className="flex-grow flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 bg-[#f59e0b] hover:bg-[#d97706] disabled:bg-emerald-600 text-stone-950 disabled:text-white text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] rounded-full transition-all duration-300 hover:scale-[1.02] active:translate-y-0.5 shadow-md"
                   >
                     {addedMessage ? (
                       <>
@@ -286,10 +286,10 @@ export default function ProductQuickView({
                   <button
                     onClick={handleWishlistSubmit}
                     disabled={wishlisted}
-                    className="flex-shrink-0 w-12 h-12 rounded-full border border-stone-200 hover:border-stone-400 text-stone-700 hover:text-red-500 hover:bg-stone-50 flex items-center justify-center transition-all hover:scale-105"
+                    className="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-stone-200 hover:border-stone-400 text-stone-700 hover:text-red-500 hover:bg-stone-50 flex items-center justify-center transition-all hover:scale-105"
                     aria-label="Add to wishlist sanctuary"
                   >
-                    <Heart size={16} fill={wishlisted ? "currentColor" : "none"} className={wishlisted ? "text-red-500" : ""} />
+                    <Heart size={15} fill={wishlisted ? "currentColor" : "none"} className={wishlisted ? "text-red-500" : ""} />
                   </button>
 
                 </div>

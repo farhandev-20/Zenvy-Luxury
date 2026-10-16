@@ -352,7 +352,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
         </div>
 
         {/* 5. GORGEOUS PREMIUM CATALOUGE GRID - MATCHING IMAGE 3 */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
           {processedProducts.slice(0, visibleItemsCount).map((prod, idx) => (
             <motion.div 
               key={prod.id} 
@@ -370,7 +370,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               
               {/* Overlay labels at bottom-left corner of visual frame */}
               {prod.tag && (
-                <span className={`absolute bottom-24 left-3 z-10 text-[8px] font-bold tracking-widest px-3 py-1.5 uppercase rounded-full shadow-sm text-stone-900 ${
+                <span className={`absolute top-2.5 left-2.5 sm:top-auto sm:bottom-24 sm:left-3 z-10 text-[7px] sm:text-[8px] font-bold tracking-widest px-2.5 py-1 sm:px-3 sm:py-1.5 uppercase rounded-full shadow-sm text-stone-900 ${
                   prod.tag.includes('LIMITED') 
                     ? 'bg-[#fed7aa]' 
                     : 'bg-amber-400'
@@ -380,7 +380,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               )}
 
               {/* Action photo frame */}
-              <div className="relative aspect-[4/5] bg-stone-50 rounded-[1.5rem] overflow-hidden mb-4 border border-stone-100 shadow-sm">
+              <div className="relative aspect-[4/5] bg-stone-50 rounded-[1.2rem] sm:rounded-[1.5rem] overflow-hidden mb-2.5 sm:mb-4 border border-stone-100 shadow-sm">
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
@@ -390,13 +390,23 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                 {/* Heart Button Overlay - TOP RIGHT - White round circle layout with fine shadow */}
                 <button 
                   onClick={(e) => { e.stopPropagation(); onAddToWishlist(prod); }}
-                  className="absolute top-3.5 right-3.5 z-20 p-2 bg-white rounded-full text-stone-700 hover:text-red-500 transition shadow-sm hover:scale-105"
+                  className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-20 p-1.5 sm:p-2 bg-white/95 rounded-full text-stone-700 hover:text-red-500 transition shadow-sm hover:scale-105"
+                  aria-label="Save to Wishlist"
                 >
-                  <Heart size={14} />
+                  <Heart size={13} className="sm:w-3.5 sm:h-3.5" />
                 </button>
 
-                {/* Shopping additions drawer bar on hover */}
-                <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity flex justify-center items-center">
+                {/* Mobile Quick Add Floating Button (always visible on touch screens) */}
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
+                  className="md:hidden absolute bottom-2.5 right-2.5 z-20 p-2 bg-amber-500 hover:bg-amber-600 text-stone-950 rounded-full shadow-md active:scale-95 transition-transform"
+                  aria-label="Add to bag"
+                >
+                  <ShoppingBag size={12} />
+                </button>
+
+                {/* Shopping additions drawer bar on hover (Desktop) */}
+                <div className="hidden md:flex absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity justify-center items-center">
                   <button 
                     onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
                     className="px-6 py-2.5 bg-white text-stone-950 font-bold text-xs tracking-wide uppercase rounded-full shadow hover:scale-103 hover:bg-stone-50 z-20"
@@ -407,14 +417,14 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               </div>
 
               {/* Sub-label information details */}
-              <div className="text-center">
-                <span className="text-[9px] tracking-[0.2em] font-medium text-stone-400 block uppercase mb-1 font-mono">
+              <div className="text-center px-1">
+                <span className="text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.2em] font-medium text-stone-400 block uppercase mb-0.5 sm:mb-1 font-mono">
                   {prod.category}
                 </span>
-                <h4 className="font-serif text-base font-semibold text-stone-900 leading-tight">
+                <h4 className="font-serif text-sm sm:text-base font-semibold text-stone-900 leading-tight line-clamp-1">
                   {prod.name}
                 </h4>
-                <span className="text-xs font-mono text-stone-700 block mt-1.5 font-bold">
+                <span className="text-xs sm:text-xs font-mono text-stone-700 block mt-1 sm:mt-1.5 font-bold">
                   ${prod.price.toLocaleString()}.00
                 </span>
               </div>
@@ -444,20 +454,20 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
       </div>
 
       {/* 5. GENTLE TRANSITION TO EXISTING FLASH SALE */}
-      <div id="fashion-flash-sale" className="bg-[#fdfcfb] border border-stone-100 rounded-[2.5rem] p-8 md:p-12 shadow-sm">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-stone-100 pb-8 mb-10">
+      <div id="fashion-flash-sale" className="bg-[#fdfcfb] border border-stone-100 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-12 shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 border-b border-stone-100 pb-6 sm:pb-8 mb-8 sm:mb-10">
           <div>
-            <h3 className="font-serif text-3xl font-medium text-stone-950">
+            <h3 className="font-serif text-2xl sm:text-3xl font-medium text-stone-950">
               Flash Sale
             </h3>
-            <p className="text-xs text-stone-500 font-light mt-1.5">
+            <p className="text-xs text-stone-500 font-light mt-1">
               Limited time luxury offers on curated pieces.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 bg-amber-500 text-stone-950 px-6 py-3 rounded-full shadow-sm text-xs font-bold tracking-[0.2em]">
-            <span className="uppercase text-[9px]">ENDS IN:</span>
-            <div className="flex items-center gap-1.5 font-mono">
+          <div className="flex items-center gap-3 sm:gap-4 bg-amber-500 text-stone-950 px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-sm text-xs font-bold tracking-[0.15em] sm:tracking-[0.2em]">
+            <span className="uppercase text-[8px] sm:text-[9px]">ENDS IN:</span>
+            <div className="flex items-center gap-1 sm:gap-1.5 font-mono">
               <span>{formatNum(timeLeft.hours)}</span>
               <span className="animate-pulse">:</span>
               <span>{formatNum(timeLeft.minutes)}</span>
@@ -467,7 +477,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
           {FASHION_PRODUCTS.slice(0, 4).map((prod, idx) => (
             <motion.div 
               key={prod.id} 
@@ -479,11 +489,11 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               className="group relative flex flex-col justify-between cursor-pointer"
             >
               
-              <span className="absolute top-4 left-4 z-10 px-3 py-1 bg-red-800 text-[9px] font-semibold text-white tracking-widest rounded-full font-mono">
+              <span className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-10 px-2 sm:px-3 py-0.5 sm:py-1 bg-red-800 text-[8px] sm:text-[9px] font-semibold text-white tracking-widest rounded-full font-mono">
                 {prod.tag}
               </span>
 
-              <div className="relative aspect-[4/5] bg-stone-50 rounded-2xl overflow-hidden mb-4">
+              <div className="relative aspect-[4/5] bg-stone-50 rounded-[1.2rem] sm:rounded-2xl overflow-hidden mb-2.5 sm:mb-4">
                 <img 
                   src={prod.image} 
                   alt={prod.name}
@@ -491,7 +501,25 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                   referrerPolicy="no-referrer"
                 />
                 
-                <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity flex justify-center items-center gap-3">
+                {/* Mobile direct buttons */}
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToWishlist(prod); }}
+                  className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-20 p-1.5 sm:p-2 bg-white/95 rounded-full text-stone-700 hover:text-red-500 transition shadow-sm hover:scale-105"
+                  aria-label="Wishlist"
+                >
+                  <Heart size={13} className="sm:w-3.5 sm:h-3.5" />
+                </button>
+
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
+                  className="md:hidden absolute bottom-2.5 right-2.5 z-20 p-2 bg-amber-500 text-stone-950 rounded-full shadow-md active:scale-95 transition-transform"
+                  aria-label="Add to bag"
+                >
+                  <ShoppingBag size={12} />
+                </button>
+
+                {/* Desktop hover */}
+                <div className="hidden md:flex absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity justify-center items-center gap-3">
                   <button 
                     onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
                     className="p-3 bg-white rounded-full text-stone-800 hover:text-amber-800 transition shadow hover:scale-105"
@@ -507,14 +535,14 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                 </div>
               </div>
 
-              <div className="text-center">
-                <span className="text-[9px] tracking-[0.2em] font-medium text-stone-400 block uppercase mb-1">
+              <div className="text-center px-1">
+                <span className="text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.2em] font-medium text-stone-400 block uppercase mb-0.5 sm:mb-1">
                   {prod.category}
                 </span>
-                <h4 className="font-serif text-base font-medium tracking-tight text-stone-900 leading-tight">
+                <h4 className="font-serif text-sm sm:text-base font-medium tracking-tight text-stone-900 leading-tight line-clamp-1">
                   {prod.name}
                 </h4>
-                <div className="mt-2.5 flex items-center justify-center gap-2">
+                <div className="mt-1.5 sm:mt-2.5 flex items-center justify-center gap-2">
                   <span className="text-xs font-semibold font-mono text-stone-800">
                     ${prod.price.toLocaleString()}
                   </span>
@@ -532,16 +560,16 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
 
       {/* 6. "Trending Now" item series */}
       <div id="fashion-trending">
-        <div className="flex justify-between items-baseline border-b border-stone-100 pb-4 mb-10">
-          <h3 className="font-serif text-3xl font-medium tracking-tight text-stone-950">
+        <div className="flex justify-between items-baseline border-b border-stone-100 pb-3 sm:pb-4 mb-6 sm:mb-10">
+          <h3 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-stone-950">
             Trending Now
           </h3>
-          <span className="text-[10px] tracking-widest font-semibold uppercase text-stone-400 hover:text-stone-820 cursor-pointer">
+          <span className="text-[9px] sm:text-[10px] tracking-widest font-semibold uppercase text-stone-400 hover:text-stone-800 cursor-pointer">
             VIEW ALL
           </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
           {FASHION_PRODUCTS.slice(4).map((prod, idx) => (
             <motion.div 
               key={prod.id} 
@@ -553,7 +581,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               className="group cursor-pointer flex flex-col justify-between"
             >
               
-              <div className="relative aspect-[3/4] bg-stone-50 rounded-2xl overflow-hidden mb-4">
+              <div className="relative aspect-[3/4] bg-stone-50 rounded-[1.2rem] sm:rounded-2xl overflow-hidden mb-2.5 sm:mb-4">
                 <img 
                   src={prod.image} 
                   alt={prod.name}
@@ -561,7 +589,23 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                   referrerPolicy="no-referrer"
                 />
                 
-                <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity flex justify-center items-center gap-3">
+                {/* Mobile direct buttons */}
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToWishlist(prod); }}
+                  className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-20 p-1.5 sm:p-2 bg-white/95 rounded-full text-stone-700 hover:text-red-500 transition shadow-sm hover:scale-105"
+                >
+                  <Heart size={13} className="sm:w-3.5 sm:h-3.5" />
+                </button>
+
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
+                  className="md:hidden absolute bottom-2.5 right-2.5 z-20 p-2 bg-amber-500 text-stone-950 rounded-full shadow-md active:scale-95 transition-transform"
+                >
+                  <ShoppingBag size={12} />
+                </button>
+
+                {/* Desktop hover */}
+                <div className="hidden md:flex absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity justify-center items-center gap-3">
                   <button 
                     onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
                     className="p-3 bg-white rounded-full text-stone-800 hover:text-amber-800 transition shadow hover:scale-105"
@@ -577,13 +621,13 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                 </div>
               </div>
 
-              <div>
-                <h4 className="font-serif text-base font-semibold tracking-tight text-stone-900 leading-tight">
+              <div className="px-1">
+                <h4 className="font-serif text-sm sm:text-base font-semibold tracking-tight text-stone-900 leading-tight line-clamp-1">
                   {prod.name}
                 </h4>
                 <div className="flex justify-between items-center mt-1 text-xs">
-                  <span className="font-mono text-stone-500">
-                    ${prod.price.toLocaleString()}.05
+                  <span className="font-mono text-stone-600 font-bold">
+                    ${prod.price.toLocaleString()}.00
                   </span>
                 </div>
               </div>
@@ -593,12 +637,12 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
       </div>
 
       {/* 7. "Curated For You" circular row */}
-      <div id="fashion-curated" className="border-t border-stone-100 pt-16">
-        <h3 className="font-serif text-3xl font-medium tracking-tight text-stone-950 mb-10 text-center">
+      <div id="fashion-curated" className="border-t border-stone-100 pt-10 sm:pt-16">
+        <h3 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-stone-950 mb-8 sm:mb-10 text-center">
           Selected for You
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {circleItems.map((prod, index) => (
             <motion.div 
               key={index}
@@ -609,7 +653,7 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
               onClick={() => onAddToBag({ id: `fc-c-${index}`, name: prod.name, price: prod.price, image: prod.image, category: 'SELECTED' })}
               className="flex flex-col items-center text-center cursor-pointer group"
             >
-              <div className="w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-stone-100 border border-stone-200 shadow-sm group-hover:shadow-md duration-500 transition-all mb-4 flex-shrink-0">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-stone-100 border border-stone-200 shadow-sm group-hover:shadow-md duration-500 transition-all mb-3 sm:mb-4 flex-shrink-0">
                 <img 
                   src={prod.image} 
                   alt={prod.name}
@@ -617,10 +661,10 @@ export default function DepartmentFashion({ onAddToBag, onAddToWishlist }: Depar
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="font-serif text-sm font-semibold tracking-tight text-stone-900">
+              <h4 className="font-serif text-xs sm:text-sm font-semibold tracking-tight text-stone-900 line-clamp-1">
                 {prod.name}
               </h4>
-              <span className="text-xs font-mono text-amber-700 block mt-1">
+              <span className="text-[11px] sm:text-xs font-mono text-amber-700 block mt-0.5 sm:mt-1 font-bold">
                 ${prod.price}.00
               </span>
             </motion.div>

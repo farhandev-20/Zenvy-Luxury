@@ -49,41 +49,41 @@ export default function ShoppingBagView({
   const shippingRatio = Math.min((subtotal / shippingThreshold) * 100, 100);
 
   return (
-    <div id="shopping-bag-container" className="w-full min-h-screen bg-[#fcfbfa] text-stone-900 py-12 px-6 md:px-12 select-none">
+    <div id="shopping-bag-container" className="w-full min-h-screen bg-[#fcfbfa] text-stone-900 py-6 sm:py-12 px-4 sm:px-6 md:px-12 select-none">
       <div className="max-w-7xl mx-auto">
         
         {/* Dynamic Cart Heading */}
-        <div id="shopping-bag-title-section" className="border-b border-stone-200 pb-8 mb-10 text-center md:text-left">
-          <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-stone-900">
+        <div id="shopping-bag-title-section" className="border-b border-stone-200 pb-5 sm:pb-8 mb-6 sm:mb-10 text-center md:text-left">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-tight text-stone-900">
             Shopping Bag ({cartItems.reduce((acc, item) => acc + item.quantity, 0)} Items)
           </h2>
-          <p className="text-xs font-light text-stone-500 tracking-wider mt-2">
+          <p className="text-xs font-light text-stone-500 tracking-wider mt-1.5 sm:mt-2">
             Luxury is in each detail. Review your selected pieces.
           </p>
         </div>
 
         {cartItems.length === 0 ? (
           /* Empty Cart state */
-          <div className="py-20 text-center border border-dashed border-stone-200 rounded-3xl bg-white max-w-xl mx-auto px-6">
-            <Heart className="mx-auto text-amber-600/30 mb-4 animate-pulse" size={48} />
-            <h3 className="font-serif text-2xl font-light text-stone-800">Your bag is empty</h3>
+          <div className="py-16 sm:py-20 text-center border border-dashed border-stone-200 rounded-2xl sm:rounded-3xl bg-white max-w-xl mx-auto px-6">
+            <Heart className="mx-auto text-amber-600/30 mb-4 animate-pulse" size={40} />
+            <h3 className="font-serif text-xl sm:text-2xl font-light text-stone-800">Your bag is empty</h3>
             <p className="text-xs text-stone-500 mt-2 leading-relaxed">
               Explore our collections to choose your perfect style.
             </p>
           </div>
         ) : (
-          <div id="shopping-grid" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div id="shopping-grid" className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-start">
             
             {/* Left Column: Cart items */}
-            <div className="lg:col-span-8 space-y-6">
+            <div className="lg:col-span-8 space-y-4 sm:space-y-6">
               {cartItems.map((item) => (
                 <div 
                   key={item.product.id}
                   id={`cart-item-${item.product.id}`}
-                  className="flex flex-col sm:flex-row gap-6 p-6 bg-white border border-stone-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow relative"
+                  className="flex flex-row gap-3 sm:gap-6 p-3.5 sm:p-6 bg-white border border-stone-100 rounded-2xl sm:rounded-3xl shadow-sm hover:shadow-md transition-shadow relative"
                 >
                   {/* Photo frame */}
-                  <div className="w-full sm:w-32 aspect-square rounded-2xl overflow-hidden bg-stone-100 flex-shrink-0">
+                  <div className="w-24 h-28 sm:w-32 sm:h-32 rounded-xl sm:rounded-2xl overflow-hidden bg-stone-100 flex-shrink-0">
                     <img 
                       src={item.product.image} 
                       alt={item.product.name} 
@@ -92,61 +92,63 @@ export default function ShoppingBagView({
                   </div>
 
                   {/* Descriptions block */}
-                  <div className="flex-grow flex flex-col justify-between">
+                  <div className="flex-grow flex flex-col justify-between min-w-0">
                     <div>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <span className="text-[10px] tracking-[0.2em] font-medium text-stone-400 uppercase block mb-1">
+                      <div className="flex justify-between items-start gap-2">
+                        <div className="min-w-0">
+                          <span className="text-[8px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] font-medium text-stone-400 uppercase block mb-0.5">
                             {item.product.category}
                           </span>
-                          <h3 className="font-serif text-lg md:text-xl font-medium tracking-tight text-stone-900">
+                          <h3 className="font-serif text-sm sm:text-lg md:text-xl font-medium tracking-tight text-stone-900 truncate">
                             {item.product.name}
                           </h3>
                         </div>
-                        <span className="font-serif text-lg font-medium text-stone-800">
+                        <span className="font-serif text-sm sm:text-lg font-medium text-stone-800 whitespace-nowrap">
                           ${item.product.price.toLocaleString()}.00
                         </span>
                       </div>
                       
                       {/* Technical specifications */}
-                      <div className="flex gap-4 text-[10px] tracking-wider text-stone-400 uppercase font-mono mt-3">
+                      <div className="flex gap-3 text-[9px] sm:text-[10px] tracking-wider text-stone-400 uppercase font-mono mt-1.5 sm:mt-3">
                         {item.selectedSize && <span>SIZE: <strong className="text-stone-700">{item.selectedSize}</strong></span>}
                         <span>COLOR: <strong className="text-stone-700">GOLD</strong></span>
                       </div>
                     </div>
 
                     {/* Quantity Adjustment + Actions Line */}
-                    <div className="flex flex-wrap justify-between items-center mt-6 gap-4">
+                    <div className="flex flex-wrap justify-between items-center mt-3 sm:mt-6 gap-2">
                       {/* Counter */}
-                      <div className="flex items-center border border-stone-200 rounded-full py-1.5 px-3 bg-stone-55 gap-3">
+                      <div className="flex items-center border border-stone-200 rounded-full py-1 px-2.5 sm:py-1.5 sm:px-3 bg-stone-50 gap-2 sm:gap-3">
                         <button 
                           onClick={() => onUpdateQuantity(item.product.id, Math.max(1, item.quantity - 1))}
-                          className="text-stone-400 hover:text-stone-955 p-1 transition-colors"
+                          className="text-stone-400 hover:text-stone-955 p-0.5 transition-colors"
+                          aria-label="Decrease quantity"
                         >
-                          <Minus size={12} />
+                          <Minus size={11} />
                         </button>
-                        <span className="text-xs font-semibold text-stone-800 font-mono w-5 text-center">
+                        <span className="text-xs font-semibold text-stone-800 font-mono w-4 sm:w-5 text-center">
                           {item.quantity}
                         </span>
                         <button 
                           onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
-                          className="text-stone-400 hover:text-stone-955 p-1 transition-colors"
+                          className="text-stone-400 hover:text-stone-955 p-0.5 transition-colors"
+                          aria-label="Increase quantity"
                         >
-                          <Plus size={12} />
+                          <Plus size={11} />
                         </button>
                       </div>
 
                       {/* Action linkages */}
-                      <div className="flex gap-6 text-[10px] tracking-widest font-semibold uppercase">
+                      <div className="flex gap-4 sm:gap-6 text-[9px] sm:text-[10px] tracking-wider font-semibold uppercase">
                         <button 
                           onClick={() => onSaveForLater(item.product)}
-                          className="text-stone-400 hover:text-amber-800 transition-colors flex items-center gap-1.5"
+                          className="text-stone-400 hover:text-amber-800 transition-colors flex items-center gap-1"
                         >
-                          <Heart size={12} /> SAVE FOR LATER
+                          <Heart size={11} /> <span className="hidden sm:inline">SAVE FOR LATER</span><span className="sm:hidden">SAVE</span>
                         </button>
                         <button 
                           onClick={() => onRemoveItem(item.product.id)}
-                          className="text-red-300 hover:text-red-700 transition-colors"
+                          className="text-red-400 hover:text-red-700 transition-colors"
                         >
                           REMOVE
                         </button>
@@ -158,10 +160,10 @@ export default function ShoppingBagView({
             </div>
 
             {/* Right Column: Order summary & Promos */}
-            <div className="lg:col-span-4 space-y-6">
+            <div className="lg:col-span-4 space-y-4 sm:space-y-6">
               
               {/* Checkout breakdown card */}
-              <div id="checkout-summary-card" className="bg-white border border-stone-100 rounded-3xl p-6 shadow-sm">
+              <div id="checkout-summary-card" className="bg-white border border-stone-100 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm">
                 
                 {/* Visual Free Shipping progress bar */}
                 <div className="border-b border-stone-100 pb-5 mb-5">

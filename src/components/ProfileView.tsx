@@ -40,14 +40,14 @@ export default function ProfileView({ userProfile, onSaveProfile, onCancel }: Pr
   const genders = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
 
   return (
-    <div id="profile-view-outer" className="w-full min-h-screen bg-[#faf8f6] py-16 px-6 md:px-12 select-none">
+    <div id="profile-view-outer" className="w-full min-h-screen bg-[#faf8f6] py-8 sm:py-16 px-4 sm:px-6 md:px-12 select-none">
       <div className="max-w-3xl mx-auto">
         
         {/* Profile Avatar Header Segment */}
-        <div id="profile-card-header" className="flex flex-col items-center text-center mb-12">
+        <div id="profile-card-header" className="flex flex-col items-center text-center mb-8 sm:mb-12">
           
-          <div className="relative mb-4 group">
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-stone-200/60 shadow-md">
+          <div className="relative mb-3 sm:mb-4 group">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-stone-200/60 shadow-md">
               <img 
                 src={profile.avatar} 
                 alt={profile.fullName} 
@@ -56,14 +56,14 @@ export default function ProfileView({ userProfile, onSaveProfile, onCancel }: Pr
             </div>
             {/* Camera Floating pencil overlay matching image */}
             <label className="absolute bottom-1 right-1 bg-amber-600 hover:bg-amber-700 text-white p-1.5 rounded-full shadow-md cursor-pointer transition-colors active:scale-95">
-              <Camera size={14} />
+              <Camera size={13} />
             </label>
           </div>
 
-          <h2 className="font-serif text-3xl font-medium tracking-normal text-stone-900 leading-tight">
+          <h2 className="font-serif text-2xl sm:text-3xl font-medium tracking-normal text-stone-900 leading-tight">
             Your Profile
           </h2>
-          <p className="text-[10px] tracking-[0.3em] font-mono text-stone-400 uppercase mt-1">
+          <p className="text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] font-mono text-stone-400 uppercase mt-1">
             PERSONAL SETTINGS
           </p>
         </div>
@@ -73,16 +73,16 @@ export default function ProfileView({ userProfile, onSaveProfile, onCancel }: Pr
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl flex items-center gap-3 text-xs font-semibold uppercase tracking-wider"
+            className="mb-6 sm:mb-8 p-3.5 sm:p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl sm:rounded-2xl flex items-center gap-3 text-xs font-semibold uppercase tracking-wider"
           >
-            <ShieldCheck size={18} className="text-emerald-600" /> Settings updated, saved securely!
+            <ShieldCheck size={18} className="text-emerald-600 flex-shrink-0" /> Settings updated, saved securely!
           </motion.div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Main settings card enclosure */}
-          <div className="bg-white border border-stone-100 rounded-[2.5rem] p-8 md:p-12 shadow-sm space-y-8">
-            <h3 className="font-serif text-xl font-semibold tracking-wide text-stone-900 border-b border-stone-100 pb-4 mb-4">
+          <div className="bg-white border border-stone-100 rounded-2xl sm:rounded-[2.5rem] p-5 sm:p-8 md:p-12 shadow-sm space-y-6 sm:space-y-8">
+            <h3 className="font-serif text-lg sm:text-xl font-semibold tracking-wide text-stone-900 border-b border-stone-100 pb-3 sm:pb-4 mb-3 sm:mb-4">
               Personal Information
             </h3>
 

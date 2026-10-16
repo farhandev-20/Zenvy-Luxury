@@ -102,31 +102,31 @@ export default function DepartmentBeauty({ onAddToBag, onAddToWishlist }: Depart
           <span>SORT: FEATURED</span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
           {BEAUTY_PRODUCTS.map(prod => (
             <div 
               key={prod.id} 
               onClick={() => setQuickViewProduct(prod)}
-              className="group relative bg-white border border-stone-100 rounded-3xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between cursor-pointer animate-none"
+              className="group relative bg-white border border-stone-100 rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between cursor-pointer animate-none"
             >
               
               {/* Heart floating click badge */}
               <button 
                 onClick={(e) => { e.stopPropagation(); toggleFavorite(prod.id, prod); }}
-                className="absolute top-8 right-8 z-10 w-8 h-8 rounded-full bg-white/94 hover:bg-white text-stone-500 hover:text-red-700 shadow-sm flex items-center justify-center transition"
+                className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/94 hover:bg-white text-stone-500 hover:text-red-700 shadow-sm flex items-center justify-center transition"
               >
-                <Heart size={14} className={favoriteStates[prod.id] ? 'fill-red-700 text-red-700' : ''} />
+                <Heart size={13} className={favoriteStates[prod.id] ? 'fill-red-700 text-red-700' : ''} />
               </button>
 
               {/* Tag item */}
               {prod.tag && (
-                <span className="absolute top-8 left-8 z-10 bg-amber-500 text-white text-[8px] font-bold px-2.5 py-1 uppercase rounded-full">
+                <span className="absolute top-4 left-4 sm:top-8 sm:left-8 z-10 bg-amber-500 text-white text-[7px] sm:text-[8px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 uppercase rounded-full">
                   {prod.tag}
                 </span>
               )}
 
               {/* Photo frame */}
-              <div className="relative aspect-[4/5] bg-stone-50 rounded-2xl overflow-hidden mb-4">
+              <div className="relative aspect-[4/5] bg-stone-50 rounded-xl sm:rounded-2xl overflow-hidden mb-2.5 sm:mb-4">
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
@@ -136,31 +136,31 @@ export default function DepartmentBeauty({ onAddToBag, onAddToWishlist }: Depart
               </div>
 
               {/* Description Details */}
-              <div className="text-center">
-                <span className="text-[9px] tracking-[0.2em] font-medium text-stone-400 block uppercase mb-1 font-mono">
+              <div className="text-center px-1">
+                <span className="text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.2em] font-medium text-stone-400 block uppercase mb-0.5 sm:mb-1 font-mono">
                   {prod.category}
                 </span>
-                <h4 className="font-serif text-base font-semibold text-stone-900 leading-tight">
+                <h4 className="font-serif text-sm sm:text-base font-semibold text-stone-900 leading-tight line-clamp-1">
                   {prod.name}
                 </h4>
 
                 {/* Stars reviews rating aligned exactly as Image 2 screen */}
-                <div className="flex justify-center mt-2 gap-0.5">
+                <div className="flex justify-center mt-1 sm:mt-2 gap-0.5">
                   {[1, 2, 3, 4, 5].map((s) => (
-                    <span key={s} className="text-amber-500 text-[10px]">★</span>
+                    <span key={s} className="text-amber-500 text-[9px] sm:text-[10px]">★</span>
                   ))}
-                  <span className="text-[10px] text-stone-400 font-mono ml-1">
+                  <span className="text-[9px] sm:text-[10px] text-stone-400 font-mono ml-1">
                     ({prod.reviewsCount})
                   </span>
                 </div>
 
-                <div className="mt-3 flex justify-between items-center bg-stone-50 p-2.5 rounded-xl">
+                <div className="mt-2 sm:mt-3 flex justify-between items-center bg-stone-50 p-2 sm:p-2.5 rounded-xl">
                   <span className="text-xs font-semibold text-stone-800 font-mono">
                     ${prod.price.toFixed(2)}
                   </span>
                   <button 
                     onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
-                    className="p-1 px-2.5 bg-stone-900 text-white hover:bg-amber-600 text-[9px] font-bold rounded-lg uppercase tracking-widest transition"
+                    className="p-1 px-2 sm:px-2.5 bg-stone-900 text-white hover:bg-amber-600 text-[8px] sm:text-[9px] font-bold rounded-lg uppercase tracking-wider transition"
                   >
                     ADD
                   </button>

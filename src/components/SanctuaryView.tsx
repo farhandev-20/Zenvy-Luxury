@@ -93,26 +93,26 @@ export default function SanctuaryView({
   ];
 
   return (
-    <div id="sanctuary-view-outer" className="w-full min-h-screen bg-[#faf8f6] py-16 px-6 md:px-12 select-none">
+    <div id="sanctuary-view-outer" className="w-full min-h-screen bg-[#faf8f6] py-8 sm:py-16 px-4 sm:px-6 md:px-12 select-none">
       <div className="max-w-7xl mx-auto">
         
         {/* Wishlist Editorial Heading */}
-        <div id="sanctuary-header-block" className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] tracking-[0.45em] text-[#dca42b] font-mono block mb-3 uppercase font-bold">
+        <div id="sanctuary-header-block" className="text-center max-w-2xl mx-auto mb-8 sm:mb-16">
+          <span className="text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.45em] text-[#dca42b] font-mono block mb-2 sm:mb-3 uppercase font-bold">
             saved selection
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl font-light text-stone-900 tracking-wide uppercase">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-stone-900 tracking-wide uppercase">
             Your Wishlist
           </h2>
-          <p className="text-xs text-stone-500 font-light leading-relaxed mt-4">
+          <p className="text-xs text-stone-500 font-light leading-relaxed mt-2 sm:mt-4">
             Items you have saved for later. A collection of your favorite styles.
           </p>
           
           {sanctuaryItems.length > 0 && (
-            <div className="mt-8 flex justify-center">
+            <div className="mt-5 sm:mt-8 flex justify-center">
               <button 
                 onClick={() => setIsShareModalOpen(true)}
-                className="px-6 py-2.5 bg-stone-900 text-white hover:bg-amber-700 text-[9px] font-bold tracking-[0.2em] uppercase transition flex items-center gap-2 rounded-full shadow-md hover:-translate-y-0.5 active:translate-y-0"
+                className="px-5 sm:px-6 py-2 sm:py-2.5 bg-stone-900 text-white hover:bg-amber-700 text-[8px] sm:text-[9px] font-bold tracking-[0.2em] uppercase transition flex items-center gap-2 rounded-full shadow-md hover:-translate-y-0.5 active:translate-y-0"
               >
                 <PartyPopper size={12} className="animate-bounce" />
                 <span>SHARE WISHLIST</span>
@@ -123,43 +123,44 @@ export default function SanctuaryView({
 
         {sanctuaryItems.length === 0 ? (
           /* Empty sanctuary state */
-          <div className="py-24 text-center border border-dashed border-stone-250 rounded-[2.5rem] bg-white max-w-xl mx-auto px-6">
-            <Sparkles className="mx-auto text-amber-600/20 mb-4 animate-spin" size={40} />
-            <h3 className="font-serif text-xl font-light text-stone-800">Your wishlist is empty</h3>
+          <div className="py-16 sm:py-24 text-center border border-dashed border-stone-250 rounded-2xl sm:rounded-[2.5rem] bg-white max-w-xl mx-auto px-6">
+            <Sparkles className="mx-auto text-amber-600/20 mb-4 animate-spin" size={36} />
+            <h3 className="font-serif text-lg sm:text-xl font-light text-stone-800">Your wishlist is empty</h3>
             <p className="text-xs text-stone-400 mt-2 leading-relaxed max-w-xs mx-auto">
               Fill it with clothes and accessories that you like.
             </p>
           </div>
         ) : (
           /* Grid list exactly styled as Image 10 */
-          <div id="sanctuary-items-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 animate-fade-in">
+          <div id="sanctuary-items-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-16 sm:mb-20 animate-fade-in">
             {sanctuaryItems.map((prod) => (
               <div 
                 key={prod.id} 
-                className="group relative bg-white border border-stone-100 rounded-3xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative"
+                className="group relative bg-white border border-stone-100 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
               >
                 {/* Specific removal X badge in corner */}
                 <button
                   onClick={() => onRemoveItem(prod.id)}
-                  className="absolute top-6 right-6 z-20 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-stone-600 hover:text-stone-900 shadow-sm flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/80 hover:bg-white text-stone-600 hover:text-stone-900 shadow-sm flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                  aria-label="Remove from wishlist"
                 >
-                  <X size={14} />
+                  <X size={13} />
                 </button>
 
                 {/* Tag items if present */}
                 {prod.originalPrice && (
-                  <span className="absolute top-6 left-6 z-20 px-3 py-1 bg-amber-500 text-[9px] font-semibold text-white uppercase tracking-wider rounded-full">
+                  <span className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 px-2 sm:px-3 py-0.5 sm:py-1 bg-amber-500 text-[8px] sm:text-[9px] font-semibold text-white uppercase tracking-wider rounded-full">
                     -{Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100)}%
                   </span>
                 )}
                 {!prod.originalPrice && prod.id === 'sanct-4' && (
-                  <span className="absolute top-6 left-6 z-20 px-3 py-1 bg-stone-900 text-[9px] font-semibold text-white uppercase tracking-wider rounded-full">
+                  <span className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 px-2 sm:px-3 py-0.5 sm:py-1 bg-stone-900 text-[8px] sm:text-[9px] font-semibold text-white uppercase tracking-wider rounded-full">
                     LIMITED
                   </span>
                 )}
 
                 {/* Photo frame */}
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-stone-100 mb-4">
+                <div className="relative aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-stone-100 mb-2.5 sm:mb-4">
                   <img 
                     src={prod.image} 
                     alt={prod.name} 
@@ -168,28 +169,28 @@ export default function SanctuaryView({
                 </div>
 
                 {/* Item Details */}
-                <div className="text-center flex-grow flex flex-col justify-between items-center">
-                  <div className="mb-4">
-                    <span className="text-[9px] tracking-[0.25em] text-stone-400 font-mono block uppercase mb-1">
+                <div className="text-center flex-grow flex flex-col justify-between items-center px-1">
+                  <div className="mb-2 sm:mb-4">
+                    <span className="text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.25em] text-stone-400 font-mono block uppercase mb-0.5 sm:mb-1">
                       {prod.category}
                     </span>
-                    <h3 className="font-serif text-base font-medium tracking-tight text-stone-900 max-w-[180px] leading-tight">
+                    <h3 className="font-serif text-sm sm:text-base font-medium tracking-tight text-stone-900 max-w-[180px] leading-tight line-clamp-1">
                       {prod.name}
                     </h3>
                     
                     {/* Star feedback aligned with Image 10 screen */}
-                    <div className="flex gap-0.5 justify-center mt-2.5">
+                    <div className="flex gap-0.5 justify-center mt-1.5 sm:mt-2.5">
                       {[1, 2, 3, 4, 5].map((s) => (
-                        <span key={s} className="text-amber-500 text-[10px]">★</span>
+                        <span key={s} className="text-amber-500 text-[9px] sm:text-[10px]">★</span>
                       ))}
                     </div>
 
-                    <div className="mt-2.5">
-                      <span className="font-serif text-sm font-semibold text-stone-850">
+                    <div className="mt-1.5 sm:mt-2.5">
+                      <span className="font-serif text-xs sm:text-sm font-semibold text-stone-850">
                         ${prod.price.toLocaleString()}
                       </span>
                       {prod.originalPrice && (
-                        <span className="text-stone-400 font-serif line-through text-xs ml-2">
+                        <span className="text-stone-400 font-serif line-through text-[10px] sm:text-xs ml-1.5 sm:ml-2">
                           ${prod.originalPrice.toLocaleString()}
                         </span>
                       )}
@@ -199,7 +200,7 @@ export default function SanctuaryView({
                   {/* Golden MOVE TO CART button */}
                   <button
                     onClick={() => onMoveToCart(prod)}
-                    className="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-[10px] font-semibold uppercase tracking-[0.2em] rounded-full transition-colors active:translate-y-0.5 inline-block"
+                    className="w-full py-2 sm:py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] rounded-full transition-colors active:translate-y-0.5 inline-block"
                   >
                     MOVE TO CART
                   </button>

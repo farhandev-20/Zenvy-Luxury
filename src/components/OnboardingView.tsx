@@ -55,8 +55,42 @@ export default function OnboardingView({ onGetStarted, onLoginClick }: Onboardin
         </button>
       </div>
 
-      {/* Main Slides visual comparison */}
-      <div id="onboarding-slides-layout" className="w-full max-w-6xl my-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center px-4 z-10 py-10">
+      {/* Mobile Single Slide Carousel View (< lg) */}
+      <div className="w-full max-w-sm my-auto lg:hidden z-10 py-6">
+        <AnimatePresence mode="wait">
+          {slides.map(slide => slide.id === activeSlide && (
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.35 }}
+              className="relative rounded-[2rem] overflow-hidden bg-white p-6 sm:p-8 shadow-xl border border-stone-200/80 aspect-[4/5] flex flex-col justify-between"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-900/40 to-transparent z-10" />
+              <img 
+                src={slide.image} 
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="z-20 text-white mt-auto">
+                <span className="text-[9px] tracking-[0.35em] text-amber-400 font-mono uppercase block mb-1 font-bold">
+                  {slide.tag}
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-light tracking-wide mb-2 leading-tight uppercase text-white">
+                  {slide.title}
+                </h3>
+                <p className="text-xs font-light text-stone-200/90 leading-relaxed font-sans">
+                  {slide.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Desktop Main Slides visual comparison (>= lg) */}
+      <div id="onboarding-slides-layout" className="hidden lg:grid w-full max-w-6xl my-auto lg:grid-cols-3 gap-8 items-center px-4 z-10 py-10">
         
         {/* Left Card - Slide 1 */}
         <motion.div 

@@ -137,12 +137,33 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
     }
   };
 
+  // Touch swipe support for mobile
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (diff > 50) {
+      handleNext(); // swipe left -> next
+    } else if (diff < -50) {
+      handlePrev(); // swipe right -> prev
+    }
+    setTouchStartX(null);
+  };
+
   return (
     <div 
       id="hero-carousel-container"
-      className="relative w-full rounded-[2rem] overflow-hidden h-[380px] sm:h-[450px] md:h-auto md:aspect-[21/9] bg-stone-950 group/carousel select-none"
+      className="relative w-full rounded-[1.8rem] sm:rounded-[2rem] overflow-hidden min-h-[340px] h-[360px] sm:h-[420px] md:h-auto md:aspect-[21/9] bg-stone-950 group/carousel select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
@@ -163,20 +184,20 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
           
           {/* Overlay Soft Matte Shadow Gradients */}
           <div className={`absolute inset-0 bg-gradient-to-r ${activeSlide.bgGradient}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-stone-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/30 to-stone-950/20" />
 
           {/* Core Content Box Panel */}
-          <div className="absolute inset-0 flex items-center px-6 sm:px-12 md:px-20 z-10">
-            <div className="max-w-2xl text-white space-y-4 md:space-y-6">
+          <div className="absolute inset-0 flex items-center px-5 sm:px-12 md:px-20 z-10">
+            <div className="max-w-2xl text-white space-y-3 sm:space-y-4 md:space-y-6">
               
               {/* Category Pill Tag */}
               <motion.div 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex items-center gap-2.5"
+                className="flex items-center gap-2"
               >
-                <span className={`text-[8px] md:text-[9px] font-bold tracking-[0.25em] px-3.5 py-1.5 uppercase rounded-full shadow ${activeSlide.tagBg}`}>
+                <span className={`text-[8px] md:text-[9px] font-bold tracking-[0.2em] sm:tracking-[0.25em] px-3 py-1 sm:px-3.5 sm:py-1.5 uppercase rounded-full shadow ${activeSlide.tagBg}`}>
                   {activeSlide.tag}
                 </span>
                 <span className={`hidden sm:flex items-center gap-1.5 text-[9px] font-mono tracking-widest font-semibold ${activeSlide.tagText}`}>
@@ -190,7 +211,7 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-[10px] md:text-xs tracking-[0.45em] text-stone-200 block font-mono font-medium uppercase"
+                className="text-[9px] sm:text-[10px] md:text-xs tracking-[0.35em] sm:tracking-[0.45em] text-stone-200 block font-mono font-medium uppercase"
               >
                 {activeSlide.subtitle}
               </motion.span>
@@ -200,7 +221,7 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="font-serif text-3xl sm:text-5xl md:text-7xl font-light tracking-widest leading-none text-white uppercase"
+                className="font-serif text-2xl sm:text-4xl md:text-6xl font-light tracking-wider sm:tracking-widest leading-tight sm:leading-none text-white uppercase"
               >
                 {activeSlide.title}<br />
                 <span className="font-serif font-semibold italic text-amber-300 drop-shadow-md">
@@ -213,7 +234,7 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="text-xs sm:text-sm text-stone-200/90 tracking-wide font-light max-w-md leading-relaxed hidden sm:block"
+                className="text-xs sm:text-sm text-stone-200/90 tracking-wide font-light max-w-md leading-relaxed line-clamp-2 sm:line-clamp-none"
               >
                 {activeSlide.description}
               </motion.p>
@@ -223,14 +244,14 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="pt-2"
+                className="pt-1 sm:pt-2"
               >
                 <button 
                   onClick={handleCtaClick}
-                  className="group/btn relative px-8 py-3.5 bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] rounded-full transition-all duration-300 hover:scale-[1.04] shadow-lg active:translate-y-0.5 flex items-center gap-2"
+                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-3.5 bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] rounded-full transition-all duration-300 hover:scale-[1.04] shadow-lg active:translate-y-0.5 flex items-center gap-2"
                 >
                   <span>{activeSlide.ctaText}</span>
-                  <ArrowRight size={14} className="transform group-hover/btn:translate-x-1.5 transition-transform duration-300" />
+                  <ArrowRight size={13} className="transform group-hover/btn:translate-x-1.5 transition-transform duration-300" />
                 </button>
               </motion.div>
 
@@ -239,25 +260,25 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Manual Sliding Chevrons - Floating Sidebar Layout */}
+      {/* Manual Sliding Chevrons - Visible on mobile for easy navigation */}
       <button
         onClick={handlePrev}
         aria-label="Previous Featured Slide"
-        className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-stone-900/45 hover:bg-stone-900/80 border border-stone-800/40 text-white rounded-full flex items-center justify-center transition-all opacity-0 group-hover/carousel:opacity-100 hover:scale-105"
+        className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-stone-900/60 md:bg-stone-900/45 hover:bg-stone-900/80 border border-stone-800/40 text-white rounded-full flex items-center justify-center transition-all opacity-80 md:opacity-0 md:group-hover/carousel:opacity-100 hover:scale-105"
       >
-        <ChevronLeft size={20} className="md:w-6 md:h-6" />
+        <ChevronLeft size={16} className="md:w-6 md:h-6" />
       </button>
 
       <button
         onClick={handleNext}
         aria-label="Next Featured Slide"
-        className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-stone-900/45 hover:bg-stone-900/80 border border-stone-800/40 text-white rounded-full flex items-center justify-center transition-all opacity-0 group-hover/carousel:opacity-100 hover:scale-105"
+        className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-stone-900/60 md:bg-stone-900/45 hover:bg-stone-900/80 border border-stone-800/40 text-white rounded-full flex items-center justify-center transition-all opacity-80 md:opacity-0 md:group-hover/carousel:opacity-100 hover:scale-105"
       >
-        <ChevronRight size={20} className="md:w-6 md:h-6" />
+        <ChevronRight size={16} className="md:w-6 md:h-6" />
       </button>
 
       {/* Elegant Mini Slide Indicators on Bottom-Right */}
-      <div className="absolute bottom-6 md:bottom-8 right-8 md:right-16 z-20 flex items-center gap-3 bg-stone-950/40 backdrop-blur-md px-4 py-2 rounded-full border border-stone-800/25">
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-8 md:right-16 z-20 flex items-center gap-2 sm:gap-3 bg-stone-950/60 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-stone-800/25">
         {CAROUSEL_SLIDES.map((slide, idx) => (
           <button
             key={slide.id}
@@ -267,7 +288,7 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
           >
             {/* Elegant horizontal sliding timeline bars */}
             <div className={`h-1 rounded-full transition-all duration-500 relative overflow-hidden ${
-              idx === currentIndex ? 'w-8 bg-amber-400' : 'w-3 bg-stone-500 hover:bg-stone-400'
+              idx === currentIndex ? 'w-6 sm:w-8 bg-amber-400' : 'w-2 sm:w-3 bg-stone-500 hover:bg-stone-400'
             }`}>
               {idx === currentIndex && !isHovered && (
                 <motion.div 
@@ -280,8 +301,8 @@ export default function HeroCarousel({ onSelectionAction }: HeroCarouselProps) {
             </div>
           </button>
         ))}
-        <span className="font-mono text-[9px] font-bold text-stone-300 ml-1 select-none">
-          {currentIndex + 1} / {CAROUSEL_SLIDES.length}
+        <span className="font-mono text-[8px] sm:text-[9px] font-bold text-stone-300 ml-1 select-none">
+          {currentIndex + 1}/{CAROUSEL_SLIDES.length}
         </span>
       </div>
 

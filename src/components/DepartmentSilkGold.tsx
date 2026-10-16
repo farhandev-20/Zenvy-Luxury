@@ -121,7 +121,7 @@ export default function DepartmentSilkGold({ onAddToBag, onAddToWishlist }: Depa
           <span>SORT: RECOMMENDED</span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
           {filteredProducts.map(prod => (
             <div 
               key={prod.id} 
@@ -130,20 +130,35 @@ export default function DepartmentSilkGold({ onAddToBag, onAddToWishlist }: Depa
             >
               
               {prod.tag && (
-                <span className="absolute top-4 left-4 z-10 bg-amber-500 text-white text-[8px] font-bold px-2.5 py-1 uppercase rounded-full">
+                <span className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-10 bg-amber-500 text-white text-[7px] sm:text-[8px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 uppercase rounded-full">
                   {prod.tag}
                 </span>
               )}
 
               {/* Action photo frame */}
-              <div className="relative aspect-[4/5] bg-stone-50 rounded-2xl overflow-hidden mb-4">
+              <div className="relative aspect-[4/5] bg-stone-50 rounded-[1.2rem] sm:rounded-2xl overflow-hidden mb-2.5 sm:mb-4">
                 <img 
                   src={prod.image} 
                   alt={prod.name} 
                   className="w-full h-full object-cover group-hover:scale-101 transition-all duration-300"
                 />
+
+                {/* Mobile direct buttons */}
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToWishlist(prod); }}
+                  className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-20 p-1.5 sm:p-2 bg-white/95 rounded-full text-stone-700 hover:text-red-500 transition shadow-sm hover:scale-105"
+                >
+                  <Heart size={13} className="sm:w-3.5 sm:h-3.5" />
+                </button>
+
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
+                  className="md:hidden absolute bottom-2.5 right-2.5 z-20 p-2 bg-amber-500 text-stone-950 rounded-full shadow-md active:scale-95 transition-transform"
+                >
+                  <ShoppingBag size={12} />
+                </button>
                 
-                <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity flex justify-center items-center gap-3">
+                <div className="hidden md:flex absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 duration-300 transition-opacity justify-center items-center gap-3">
                   <button 
                     onClick={(e) => { e.stopPropagation(); onAddToBag(prod); }}
                     className="p-3 bg-white rounded-full text-stone-800 hover:text-amber-800 transition shadow hover:scale-105"
@@ -160,14 +175,14 @@ export default function DepartmentSilkGold({ onAddToBag, onAddToWishlist }: Depa
               </div>
 
               {/* Specs */}
-              <div className="text-center">
-                <span className="text-[9px] tracking-[0.2em] font-medium text-stone-400 block uppercase mb-1 font-mono">
+              <div className="text-center px-1">
+                <span className="text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.2em] font-medium text-stone-400 block uppercase mb-0.5 sm:mb-1 font-mono">
                   {prod.category}
                 </span>
-                <h4 className="font-serif text-base font-semibold text-stone-900 leading-tight">
+                <h4 className="font-serif text-sm sm:text-base font-semibold text-stone-900 leading-tight line-clamp-1">
                   {prod.name}
                 </h4>
-                <span className="text-xs font-mono text-stone-500 block mt-1.5">
+                <span className="text-xs font-mono text-stone-600 font-bold block mt-1 sm:mt-1.5">
                   ${prod.price.toLocaleString()}.00
                 </span>
               </div>
